@@ -1,0 +1,25 @@
+version: '3'
+services:
+  web:
+    image: php:7.4-apache
+    container_name: mi-aplicacion-web
+    ports:
+      - "80:80"
+    volumes:
+      - ./app:/var/www/html
+    networks:
+      - my-network
+  db:
+    image: mysql:5.7
+    container_name: mi-aplicacion-db
+    environment:
+      MYSQL_ROOT_PASSWORD: ${MYSQL_ROOT_PASSWORD}
+      MYSQL_DATABASE: ${MYSQL_DATABASE}
+      MYSQL_USER: ${MYSQL_USER}
+      MYSQL_PASSWORD: ${MYSQL_PASSWORD}
+    volumes:
+      - ./mysql:/var/lib/mysql
+    networks:
+      - my-network
+networks:
+  my-network:
